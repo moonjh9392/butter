@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import Top from './components/Top.tsx';
+import Bottom from './components/Bottom.tsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainComponent>
+      <Top />
+      <Bottom />
+    </MainComponent>
   );
 }
 
 export default App;
+
+const MainComponent = styled.div`
+  section {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  font-size: 30px;
+  color: white;
+`;
