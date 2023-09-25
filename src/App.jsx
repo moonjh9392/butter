@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import Top from './components/Top.tsx';
-import Bottom from './components/Bottom.tsx';
+import MainTop from './components/MainTop';
+import MainBottom from './components/MainBottom';
 
 function App() {
   return (
     <MainComponent>
-      <Top />
-      <Bottom />
+      <MainTop />
+      <MainBottom />
     </MainComponent>
   );
 }
@@ -15,12 +15,12 @@ export default App;
 
 const MainComponent = styled.div`
   section {
-    width: 100vw;
     height: 100vh;
     overflow: hidden;
     position: relative;
   }
 
-  font-size: 30px;
+  font-size: 2rem;
   color: white;
+  background-color: rgb(35, 39, 48);
 `;

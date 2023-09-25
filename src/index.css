@@ -108,6 +108,8 @@ section {
 body {
   line-height: 1;
   box-sizing: border-box;
+  font-family: 'Pretendard-Regular';
+  font-size: 1rem;
 }
 ol,
 ul {
@@ -127,4 +129,19 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+/* font-family */
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Victorian';
+  src: url('./assets/fonts/Victorian-K75q7.otf');
+  font-weight: 800;
+  font-style: normal;
 }

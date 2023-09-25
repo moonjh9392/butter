@@ -2,6 +2,35 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import image5 from '../assets/image5.svg';
 
+const BottomComponent = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .activeMenu {
+    display: flex;
+    justify-content: space-around;
+    padding: 2em 1em;
+    color: rgb(111, 115, 124);
+    li:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+  .active {
+    color: white;
+    text-decoration: underline;
+  }
+  .desc {
+    z-index: 1;
+  }
+
+  img {
+    position: absolute;
+    top: 7em;
+    right: 3em;
+  }
+`;
 const Bottom = () => {
   const [active, setActive] = useState('');
 
@@ -41,34 +70,3 @@ const Bottom = () => {
 };
 
 export default Bottom;
-
-const BottomComponent = styled.section`
-  background-color: rgb(35, 39, 48);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  .activeMenu {
-    display: flex;
-    justify-content: space-around;
-    padding: 2em 1em;
-    color: rgb(111, 115, 124);
-    li:hover {
-      color: white;
-      text-decoration: underline;
-    }
-  }
-  .active {
-    color: white;
-    text-decoration: underline;
-  }
-  .desc {
-    z-index: 1;
-  }
-
-  img {
-    position: absolute;
-    top: 7em;
-    right: 3em;
-  }
-`;
