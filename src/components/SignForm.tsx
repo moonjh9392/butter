@@ -127,7 +127,7 @@ const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
       UserAuth(dataToSend, true);
     }
     if (type === MODAL_SIGNIN) {
-      const { id, password, ...rest } = formData;
+      const { id, password } = formData;
       //SignIn API
       UserAuth({ id, password }, false);
     }
