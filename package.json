@@ -19,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "cp build/index.html build/404.html && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +42,6 @@
   },
   "devDependencies": {
     "typescript": "^5.2.2"
-  }
+  },
+  "homepage": "https://moonjh9392.github.io/butter/"
 }
