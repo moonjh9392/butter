@@ -8,29 +8,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, A11y, Autoplay } from 'swiper/modules';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-import SignInForm from './SignInForm';
-import SignUpForm from './SignUpForm';
+import SignForm from './SignForm';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const TopComponent = styled.section`
-  .topMenu {
-    padding: 2em 0.7em;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-  }
   #title {
     font-family: 'Victorian';
     font-size: 4em;
     position: absolute;
     bottom: 30%;
-    left: 25%;
+    left: 30%;
     -ms-transform: rotate(-8deg); /* IE 9 */
     -webkit-transform: rotate(-8deg); /* Chrome, Safari, Opera */
     transform: rotate(-8deg);
@@ -39,7 +28,7 @@ const TopComponent = styled.section`
   /* swiper style */
   .swiper .swiper-pagination {
     position: absolute;
-    bottom: 300px;
+    bottom: 20%;
   }
   .swiper .swiper-pagination-bullet {
     background-color: #fff;
@@ -49,54 +38,71 @@ const TopComponent = styled.section`
   }
 `;
 
+const TopMenu = styled.ul`
+  margin: 1em;
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  top: 1em;
+  left: 0;
+  right: 0;
+
+  .reservation {
+    flex: 1;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+  }
+  .logo {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    font-size: 3em;
+  }
+  .hamburger {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
+
 const ModalBg = styled.div`
-  width: 100vw;
-  height: 100vh;
   background-color: rgb(0, 0, 0, 0.8);
   z-index: 999;
-  overflow: hidden;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const Top = () => {
-  const [signInOpen, setSignInOpen] = useState(false);
-  const [signUpOpen, setSignUpOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [current, setCurrent] = useState('signin');
   const images = [image1, image2, image3, image4];
 
-  const handleSignInOpen = () => {
-    console.log('setSignInOpen');
-    setSignInOpen(true);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+    setCurrent('signin');
   };
 
-  const handleSignUpOpen = () => {
-    console.log('setSignUpOpen');
-    setSignUpOpen(true);
-  };
-
-  const handleSignInClose = () => {
-    console.log('setSignInOpen');
-    setSignInOpen(false);
-  };
-
-  const handleSignUpClose = () => {
-    console.log('setSignUpOpen');
-    setSignUpOpen(false);
-  };
   return (
     <TopComponent>
       <nav>
-        <ul className="topMenu">
-          <li onClick={handleSignInOpen}>RESERVATION</li>
-          <li>BUTTER</li>
-          <li>
+        <TopMenu>
+          <li className="reservation" onClick={toggleModal}>
+            <span>RESERVATION</span>
+          </li>
+          <li className="logo">
+            <span>BUTTER</span>
+          </li>
+          <li className="hamburger">
             <GiHamburgerMenu />
           </li>
-        </ul>
+        </TopMenu>
       </nav>
 
       <Swiper
@@ -120,14 +126,10 @@ const Top = () => {
         })}
       </Swiper>
 
-      {signInOpen && (
+      {/* Modal */}
+      {isOpen && (
         <ModalBg>
-          <SignInForm SignUpOpen={handleSignUpOpen} SignInClose={handleSignInClose} />
-        </ModalBg>
-      )}
-      {signUpOpen && (
-        <ModalBg>
-          <SignUpForm SignInOpen={handleSignInOpen} SignUpClose={handleSignUpClose} />
+          <SignForm current={current} setCurrent={setCurrent} toggleModal={toggleModal} />
         </ModalBg>
       )}
     </TopComponent>

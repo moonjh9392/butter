@@ -20,7 +20,6 @@ const MainComponent = styled.div`
     position: relative;
   }
 
-  font-size: 2rem;
   color: white;
   background-color: rgb(35, 39, 48);
 `;

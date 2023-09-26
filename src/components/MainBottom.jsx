@@ -6,29 +6,39 @@ const BottomComponent = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-size: 1em;
 
   .activeMenu {
     display: flex;
     justify-content: space-around;
     padding: 2em 1em;
     color: rgb(111, 115, 124);
-    li:hover {
-      color: white;
-      text-decoration: underline;
-    }
   }
-  .active {
+  .active,
+  li:hover {
     color: white;
     text-decoration: underline;
+    text-underline-offset: 8px;
+    cursor: pointer;
   }
   .desc {
     z-index: 1;
+    margin: 2em 4em;
+
+    p {
+      padding: 10px 0;
+    }
+    .eng {
+      font-size: 3.5em;
+    }
   }
 
-  img {
+  .bottom_img {
+    width: 50%;
+    height: 70%;
     position: absolute;
-    top: 7em;
-    right: 3em;
+    bottom: 5%;
+    right: 5%;
   }
 `;
 const Bottom = () => {
@@ -58,13 +68,15 @@ const Bottom = () => {
         </ul>
       </nav>
       <div className="desc">
-        <p>HIGH-END CAR</p>
-        <p>STROE</p>
+        <p className="eng">HIGH-END CAR</p>
+        <p className="eng">STROE</p>
         <p>하이엔드 직수입, 구매부터 튜닝까지</p>
         <p>고객의 요구에 맞춘 최상의 서비스를 제공합니다.</p>
       </div>
-      <div className="desc">VIEW MORE</div>
-      <img src={image5} alt={'image5'} />
+      <div className="desc">
+        <p className="active">VIEW MORE</p>
+      </div>
+      <img className="bottom_img" src={image5} alt={'image5'} />
     </BottomComponent>
   );
 };

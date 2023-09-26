@@ -108,8 +108,27 @@ section {
 body {
   line-height: 1;
   box-sizing: border-box;
-  font-family: 'Pretendard-Regular';
-  font-size: 1rem;
+  font-family: 'Pretendard';
+  font-size: 2rem;
+  user-select: none;
+
+  @media (max-width: 1024px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+
+  /*스크롤바 투명처리*/
+  /* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll {
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+  }
 }
 ol,
 ul {
@@ -130,18 +149,24 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+button {
+  background-color: inherit;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
 
 /* font-family */
 @font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 800;
+  font-family: 'Pretendard';
+  src: url('./assets/fonts/PretendardVariable.ttf');
+  font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Victorian';
   src: url('./assets/fonts/Victorian-K75q7.otf');
-  font-weight: 800;
+  font-weight: 700;
   font-style: normal;
 }
