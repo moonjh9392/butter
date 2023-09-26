@@ -23,7 +23,7 @@ export const UserAuth = async <T>(data: T, isSignUp: boolean): Promise<void> => 
 
         await UserInfo();
       } else {
-        // 없는 경우 test
+        // 없는 경우
       }
     }
   } catch (error) {
