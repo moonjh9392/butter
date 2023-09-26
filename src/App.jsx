@@ -15,7 +15,6 @@ export default App;
 
 const MainComponent = styled.div`
   section {
-    height: 100vh;
     overflow: hidden;
     position: relative;
   }

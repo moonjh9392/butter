@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import image5 from '../assets/image5.svg';
+import image5 from '../assets/images/image5.png';
 
 const BottomComponent = styled.section`
   display: flex;
@@ -15,36 +15,39 @@ const BottomComponent = styled.section`
     color: rgb(111, 115, 124);
   }
   .active,
+  a,
   li:hover {
     color: white;
     text-decoration: underline;
     text-underline-offset: 8px;
     cursor: pointer;
   }
-  .desc {
-    z-index: 1;
-    margin: 2em 4em;
-
-    p {
-      padding: 10px 0;
-    }
-    .eng {
-      font-size: 3.5em;
-    }
-  }
 
   .bottom_img {
     width: 50%;
-    height: 70%;
+    height: 60%;
     position: absolute;
-    bottom: 5%;
+    bottom: 10%;
     right: 5%;
   }
 `;
+
+const Desc = styled.div`
+  z-index: 1;
+  margin: 2em 4em;
+
+  p {
+    padding: 10px 0;
+  }
+  .eng {
+    font-size: 3.5em;
+  }
+`;
+
+const menuItems = ['High-end Car', 'MAINENANCE', 'TUNNING CAR', 'BODY PAINT'];
+
 const Bottom = () => {
   const [active, setActive] = useState('');
-
-  const menuItems = ['High-end Car', 'MAINENANCE', 'TUNNING CAR', 'BODY PAINT'];
 
   //메인 페이지 하단 메뉴들 Active 펑션
   const changeActive = (item) => {
@@ -67,15 +70,17 @@ const Bottom = () => {
           })}
         </ul>
       </nav>
-      <div className="desc">
+      <Desc>
         <p className="eng">HIGH-END CAR</p>
         <p className="eng">STROE</p>
         <p>하이엔드 직수입, 구매부터 튜닝까지</p>
         <p>고객의 요구에 맞춘 최상의 서비스를 제공합니다.</p>
-      </div>
-      <div className="desc">
-        <p className="active">VIEW MORE</p>
-      </div>
+      </Desc>
+      <Desc>
+        <a href={'https://github.com/moonjh9392'} target="_blank" rel="noopener noreferrer">
+          VIEW MORE
+        </a>
+      </Desc>
       <img className="bottom_img" src={image5} alt={'image5'} />
     </BottomComponent>
   );

@@ -1,6 +1,89 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { UserSignIn, UserSignUp } from '../api/api';
+import { MODAL_SIGNIN, MODAL_SIGNUP } from './MainTop';
+
+const SignFormStyle = styled.div`
+  ${(props) =>
+    props.current === MODAL_SIGNIN
+      ? `width: 30%;
+  height: 40%;`
+      : `width: 35%;
+  height: 80%;`}
+
+  background-color: rgb(45, 45, 45);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: slideIn 0.3s ease-in-out;
+
+  button {
+    font-size: 0.7em;
+  }
+  .close_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.7em;
+    margin: 10px;
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+`;
+const InputField = styled.div`
+  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    width: 35%;
+  }
+
+  input {
+    padding: 2%;
+    height: 2em;
+    width: 35%;
+    border-radius: 8px;
+  }
+`;
+
+const Button = styled.button`
+  color: gray;
+
+  &:hover {
+    color: white;
+  }
+`;
+
+const JoinButton = styled.button`
+  background-color: rgb(116, 119, 140);
+  color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
+const GrayText = styled.span`
+  color: gray;
+`;
 
 const SignInForm = ({ current, setCurrent, toggleModal }) => {
   const [formData, setFormData] = useState({
@@ -15,12 +98,12 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
 
   const handleSubmit = (e, type) => {
     e.preventDefault();
-    if (type === 'signup') {
+    if (type === MODAL_SIGNUP) {
       // 유저 아이디 정규 표현식 검증
       const userIdRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,15}$/;
 
       if (!userIdRegex.test(formData.userId)) {
-        alert('유저 아이디가 유효하지 않습니다. 영어와 숫자를 조합해주세요.');
+        alert('유저 아이디가 유효하지 않습니다. 영어와 숫자를 조합하여 6~15글자로 만들어주세요.');
         return;
       }
       // 비밀번호와 비밀번호 재확인 일치 여부 확인
@@ -33,7 +116,7 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
       //SingUp API
       UserSignUp(dataToSend);
     }
-    if (type === 'signin') {
+    if (type === MODAL_SIGNIN) {
       const { id, password, ...rest } = formData;
       //SignIn API
       UserSignIn({ id, password });
@@ -49,7 +132,7 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
   };
 
   const handleSignUpOpen = () => {
-    setCurrent('signup');
+    setCurrent(MODAL_SIGNUP);
   };
 
   useEffect(() => {
@@ -59,13 +142,13 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
 
   return (
     <SignFormStyle current={current}>
-      {current === 'signin' && (
+      {current === MODAL_SIGNIN && (
         <>
-          <div>Login</div>
-          <div>
+          <InputField>Login</InputField>
+          <InputField>
             <input type="text" id="id" name="id" value={formData.id} onChange={handleChange} required />
-          </div>
-          <div>
+          </InputField>
+          <InputField>
             <input
               type="password"
               id="password"
@@ -74,27 +157,27 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div className="gray">
-            <button className="gray" type="submit" onClick={(e) => handleSubmit(e, 'signin')}>
+          </InputField>
+          <InputField>
+            <Button className="gray" type="submit" onClick={(e) => handleSubmit(e, MODAL_SIGNIN)}>
               Signin
-            </button>
-            {'|'}
-            <button type="button" onClick={handleSignUpOpen}>
+            </Button>
+            <GrayText>|</GrayText>
+            <Button type="button" onClick={handleSignUpOpen}>
               Sign up
-            </button>
-          </div>
+            </Button>
+          </InputField>
         </>
       )}
 
-      {current === 'signup' && (
+      {current === MODAL_SIGNUP && (
         <>
-          <div>Sign up</div>
-          <div>
+          <InputField>Sign up</InputField>
+          <InputField>
             <label htmlFor="userId">ID</label>
             <input type="text" id="userId" name="userId" value={formData.userId} onChange={handleChange} required />
-          </div>
-          <div>
+          </InputField>
+          <InputField>
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -104,8 +187,8 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div>
+          </InputField>
+          <InputField>
             <label htmlFor="passwordConfirm">Re-Enter</label>
             <input
               type="password"
@@ -115,8 +198,8 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div>
+          </InputField>
+          <InputField>
             <label htmlFor="userName">Name</label>
             <input
               type="text"
@@ -126,20 +209,20 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div>
+          </InputField>
+          <InputField>
             <label htmlFor="email">E-mail</label>
             <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-          </div>
-          <div>
+          </InputField>
+          <InputField>
             <label htmlFor="mobile">Mobile</label>
             <input type="tel" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} required />
-          </div>
-          <div>
-            <button className="join_btn" type="submit" onClick={(e) => handleSubmit(e, 'signup')}>
+          </InputField>
+          <InputField>
+            <JoinButton className="join_btn" type="submit" onClick={(e) => handleSubmit(e, MODAL_SIGNUP)}>
               Join Us
-            </button>
-          </div>
+            </JoinButton>
+          </InputField>
         </>
       )}
       <button className="close_btn" onClick={toggleModal}>
@@ -150,74 +233,3 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
 };
 
 export default SignInForm;
-const SignFormStyle = styled.div`
-  ${(props) =>
-    props.current === 'signin'
-      ? `width: 30%;
-  height: 40%;`
-      : `width: 35%;
-  height: 65%;`}
-
-  background-color: rgb(45, 45, 45);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 4px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-  position: relative;
-  animation: slideIn 0.3s ease-in-out;
-  div {
-    margin: 10px 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  input {
-    padding: 2%;
-    height: 2em;
-    width: 50%;
-    border-radius: 8px;
-  }
-  button {
-    font-size: 0.7em;
-    color: gray;
-  }
-  button:hover {
-    color: white;
-  }
-  label {
-    width: 150px;
-  }
-  .gray {
-    color: gray;
-  }
-  .close_btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 0.7em;
-    margin: 10px;
-  }
-
-  .join_btn {
-    background-color: rgb(116, 119, 140);
-    color: white;
-    border-radius: 8px;
-    padding: 8px 16px;
-  }
-  .join_btn:hover {
-    opacity: 0.5;
-  }
-
-  @keyframes slideIn {
-    0% {
-      transform: translateY(-50px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-`;

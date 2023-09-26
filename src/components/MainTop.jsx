@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import image1 from '../assets/image1.svg';
-import image2 from '../assets/image2.svg';
-import image3 from '../assets/image3.svg';
-import image4 from '../assets/image4.svg';
+import image1 from '../assets/images/image1.png';
+import image2 from '../assets/images/image2.png';
+import image3 from '../assets/images/image3.png';
+import image4 from '../assets/images/image4.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, A11y, Autoplay } from 'swiper/modules';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -24,7 +24,10 @@ const TopComponent = styled.section`
     -webkit-transform: rotate(-8deg); /* Chrome, Safari, Opera */
     transform: rotate(-8deg);
   }
-
+  img {
+    width: 100%;
+    height: 100vh;
+  }
   /* swiper style */
   .swiper .swiper-pagination {
     position: absolute;
@@ -79,14 +82,33 @@ const ModalBg = styled.div`
   align-items: center;
 `;
 
+const images = [image1, image2, image3, image4];
+
+// swiper option
+const swiperOptions = {
+  modules: [Pagination, Navigation, A11y, Autoplay],
+  spaceBetween: 0,
+  slidesPerView: 1,
+  navigation: true,
+  pagination: {
+    clickable: true,
+  },
+  autoplay: { delay: 3000, disableOnInteraction: false },
+  loop: true,
+};
+
+// modal 제어 변수
+export const MODAL_SIGNIN = 'signin';
+export const MODAL_SIGNUP = 'signup';
+
 const Top = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [current, setCurrent] = useState('signin');
-  const images = [image1, image2, image3, image4];
+  const [current, setCurrent] = useState(MODAL_SIGNIN);
 
+  // 모달 open
   const toggleModal = () => {
     setIsOpen(!isOpen);
-    setCurrent('signin');
+    setCurrent(MODAL_SIGNIN);
   };
 
   return (
@@ -105,17 +127,7 @@ const Top = () => {
         </TopMenu>
       </nav>
 
-      <Swiper
-        modules={[Pagination, Navigation, A11y, Autoplay]}
-        spaceBetween={0}
-        slidesPerView={1}
-        navigation
-        pagination={{
-          clickable: true,
-        }}
-        // autoplay={{ delay: 3000, disableOnInteraction: false }}
-        loop={true}
-      >
+      <Swiper {...swiperOptions}>
         {images.map((item, index) => {
           return (
             <SwiperSlide key={item}>
