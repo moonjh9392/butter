@@ -159,14 +159,14 @@ button {
 /* font-family */
 @font-face {
   font-family: 'Pretendard';
-  src: url('./assets/fonts/PretendardVariable.ttf');
+  src: url('./assets/fonts/PretendardVariable.ttf') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Victorian';
-  src: url('./assets/fonts/Victorian-K75q7.otf');
+  src: url('./assets/fonts/Victorian-K75q7.otf') format('woff');
   font-weight: 700;
   font-style: normal;
 }
