@@ -44,13 +44,13 @@ const Desc = styled.div`
   }
 `;
 
-const menuItems = ['High-end Car', 'MAINENANCE', 'TUNNING CAR', 'BODY PAINT'];
+const menuItems: string[] = ['High-end Car', 'MAINENANCE', 'TUNNING CAR', 'BODY PAINT'];
 
 const Bottom = () => {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState<string>('');
 
   //메인 페이지 하단 메뉴들 Active 펑션
-  const changeActive = (item) => {
+  const changeActive = (item: string) => {
     setActive(item);
   };
   return (

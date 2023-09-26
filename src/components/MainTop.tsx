@@ -98,17 +98,30 @@ const swiperOptions = {
 };
 
 // modal 제어 변수
-export const MODAL_SIGNIN = 'signin';
-export const MODAL_SIGNUP = 'signup';
+export const MODAL_SIGNIN: string = 'signin';
+export const MODAL_SIGNUP: string = 'signup';
+
+//SignFormProps
+export interface SignFormProps {
+  current: string;
+  setCurrent: React.Dispatch<React.SetStateAction<string>>;
+  toggleModal: () => void;
+}
 
 const Top = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [current, setCurrent] = useState(MODAL_SIGNIN);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [current, setCurrent] = useState<string>(MODAL_SIGNIN);
 
   // 모달 open
   const toggleModal = () => {
     setIsOpen(!isOpen);
     setCurrent(MODAL_SIGNIN);
+  };
+
+  const SignFormProps: SignFormProps = {
+    current,
+    setCurrent,
+    toggleModal,
   };
 
   return (
@@ -141,7 +154,7 @@ const Top = () => {
       {/* Modal */}
       {isOpen && (
         <ModalBg>
-          <SignForm current={current} setCurrent={setCurrent} toggleModal={toggleModal} />
+          <SignForm {...SignFormProps} />
         </ModalBg>
       )}
     </TopComponent>

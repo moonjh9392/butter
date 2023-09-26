@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { UserSignIn, UserSignUp } from '../api/api';
-import { MODAL_SIGNIN, MODAL_SIGNUP } from './MainTop';
+import { UserAuth } from '../api/api';
+import { MODAL_SIGNIN, MODAL_SIGNUP, SignFormProps } from './MainTop';
 
-const SignFormStyle = styled.div`
+const SignFormStyle = styled.div<{ current: string }>`
   ${(props) =>
     props.current === MODAL_SIGNIN
       ? `width: 30%;
@@ -85,8 +85,18 @@ const GrayText = styled.span`
   color: gray;
 `;
 
-const SignInForm = ({ current, setCurrent, toggleModal }) => {
-  const [formData, setFormData] = useState({
+interface FormData {
+  id: string;
+  userId: string;
+  password: string;
+  passwordConfirm: string;
+  userName: string;
+  email: string;
+  mobile: string;
+}
+
+const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
+  const [formData, setFormData] = useState<FormData>({
     id: '',
     userId: '',
     password: '',
@@ -96,7 +106,7 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
     mobile: '',
   });
 
-  const handleSubmit = (e, type) => {
+  const handleSubmit = (e: React.FormEvent, type: string) => {
     e.preventDefault();
     if (type === MODAL_SIGNUP) {
       // 유저 아이디 정규 표현식 검증
@@ -114,12 +124,12 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
       // formData에서 id,passwordConfirm 필드를 삭제하고 API로 보내기
       const { id, passwordConfirm, ...dataToSend } = formData;
       //SingUp API
-      UserSignUp(dataToSend);
+      UserAuth(dataToSend, true);
     }
     if (type === MODAL_SIGNIN) {
       const { id, password, ...rest } = formData;
       //SignIn API
-      UserSignIn({ id, password });
+      UserAuth({ id, password }, false);
     }
   };
 
@@ -136,8 +146,15 @@ const SignInForm = ({ current, setCurrent, toggleModal }) => {
   };
 
   useEffect(() => {
-    document.body.style = `overflow: hidden`;
-    return () => (document.body.style = `overflow: auto`);
+    //Modal이 open 된상태에서 스크롤 작동 멈춤
+    const body = document.body;
+    if (body) {
+      body.style.overflow = 'hidden';
+
+      return () => {
+        body.style.overflow = 'auto';
+      };
+    }
   }, []);
 
   return (
