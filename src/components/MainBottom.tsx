@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import image5 from '../assets/images/image5.png';
 
 const BottomComponent = styled.section`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
