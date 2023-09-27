@@ -96,7 +96,7 @@ interface FormData {
 }
 
 const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
-  const [formData, setFormData] = useState<FormData>({
+  const init_formData: FormData = {
     id: '',
     userId: '',
     password: '',
@@ -104,9 +104,10 @@ const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
     userName: '',
     email: '',
     mobile: '',
-  });
+  };
+  const [formData, setFormData] = useState<FormData>(init_formData);
 
-  const handleSubmit = (e: React.FormEvent, type: string) => {
+  const handleSubmit = async (e: React.FormEvent, type: string) => {
     e.preventDefault();
     if (type === MODAL_SIGNUP) {
       // 유저 아이디 정규 표현식 검증
@@ -124,12 +125,21 @@ const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
       // formData에서 id,passwordConfirm 필드를 삭제하고 API로 보내기
       const { id, passwordConfirm, ...dataToSend } = formData;
       //SingUp API
-      UserAuth(dataToSend, true);
+      const result = await UserAuth(dataToSend, true);
+      if (result.status === 200) {
+        alert('회원가입 성공');
+        setCurrent(MODAL_SIGNIN);
+        setFormData(init_formData);
+      }
     }
     if (type === MODAL_SIGNIN) {
       const { id, password } = formData;
       //SignIn API
-      UserAuth({ id, password }, false);
+      const result = await UserAuth({ id, password }, false);
+      if (result.status === 200) {
+        alert('로그인 성공');
+        toggleModal();
+      }
     }
   };
 
@@ -143,6 +153,7 @@ const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
 
   const handleSignUpOpen = () => {
     setCurrent(MODAL_SIGNUP);
+    setFormData(init_formData);
   };
 
   useEffect(() => {

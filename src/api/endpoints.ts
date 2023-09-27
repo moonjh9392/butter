@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-const BASE_URL: string = 'https://assignment.dev.buttercorp.kr';
+export const BASE_URL: string = 'https://assignment.dev.buttercorp.kr';
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,

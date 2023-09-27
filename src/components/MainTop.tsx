@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import image1 from '../assets/images/image1.png';
 import image2 from '../assets/images/image2.png';
@@ -12,6 +12,7 @@ import SignForm from './SignForm';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { BASE_URL } from '../api/endpoints';
 
 const TopComponent = styled.section`
   #title {
@@ -24,11 +25,13 @@ const TopComponent = styled.section`
     -webkit-transform: rotate(-8deg); /* Chrome, Safari, Opera */
     transform: rotate(-8deg);
   }
-  img {
+
+  /* swiper style */
+  .swiper_img {
     width: 100%;
     height: 100vh;
   }
-  /* swiper style */
+
   .swiper .swiper-pagination {
     position: absolute;
     bottom: 20%;
@@ -111,6 +114,7 @@ export interface SignFormProps {
 const Top = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [current, setCurrent] = useState<string>(MODAL_SIGNIN);
+  const [imgUrl, setImgUrl] = useState<null | string>();
 
   // 모달 open
   const toggleModal = () => {
@@ -123,14 +127,25 @@ const Top = () => {
     setCurrent,
     toggleModal,
   };
-
+  useEffect(() => {
+    //모달 닫힐때 세션 변경사항 확인
+    setImgUrl(sessionStorage.getItem('imgUrl'));
+  }, [isOpen]);
   return (
     <TopComponent>
       <nav>
         <TopMenu>
-          <li className="reservation" onClick={toggleModal}>
-            <span>RESERVATION</span>
-          </li>
+          {imgUrl ? (
+            <li className="reservation">
+              <img src={`${BASE_URL}${imgUrl}`} alt="img" />
+            </li>
+          ) : (
+            <li className="reservation" onClick={toggleModal}>
+              {}
+              <span>RESERVATION</span>
+            </li>
+          )}
+
           <li className="logo">
             <span>BUTTER</span>
           </li>
@@ -144,7 +159,7 @@ const Top = () => {
         {images.map((item, index) => {
           return (
             <SwiperSlide key={item}>
-              <img src={item} alt={`${item}-${index}`} />
+              <img className="swiper_img" src={item} alt={`${item}-${index}`} />
               {index === 0 && <p id="title">For The high-end</p>}
             </SwiperSlide>
           );
