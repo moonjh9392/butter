@@ -25,10 +25,13 @@ const TopComponent = styled.section`
     -webkit-transform: rotate(-8deg); /* Chrome, Safari, Opera */
     transform: rotate(-8deg);
   }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
   /* swiper style */
   .swiper_img {
-    width: 100%;
     height: 100vh;
   }
 
