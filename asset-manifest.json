@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/butter/static/css/main.cf327c64.css",
-    "main.js": "/butter/static/js/main.88322f4f.js",
+    "main.css": "/butter/static/css/main.753a05da.css",
+    "main.js": "/butter/static/js/main.d24da09e.js",
     "static/media/PretendardVariable.ttf": "/butter/static/media/PretendardVariable.4ab1a55a486870ed0174.ttf",
     "static/media/image2.png": "/butter/static/media/image2.038b999b4be7c690f962.png",
     "static/media/image3.png": "/butter/static/media/image3.c8cd86d15fe0806e80f6.png",
@@ -10,11 +10,11 @@
     "static/media/image5.png": "/butter/static/media/image5.ed5cb9d5bf813d29422d.png",
     "static/media/Victorian-K75q7.otf": "/butter/static/media/Victorian-K75q7.d129768d7873e1922e92.otf",
     "index.html": "/butter/index.html",
-    "main.cf327c64.css.map": "/butter/static/css/main.cf327c64.css.map",
-    "main.88322f4f.js.map": "/butter/static/js/main.88322f4f.js.map"
+    "main.753a05da.css.map": "/butter/static/css/main.753a05da.css.map",
+    "main.d24da09e.js.map": "/butter/static/js/main.d24da09e.js.map"
   },
   "entrypoints": [
-    "static/css/main.cf327c64.css",
-    "static/js/main.88322f4f.js"
+    "static/css/main.753a05da.css",
+    "static/js/main.d24da09e.js"
   ]
 }
