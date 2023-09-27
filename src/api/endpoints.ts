@@ -4,7 +4,6 @@ export const BASE_URL: string = 'https://assignment.dev.buttercorp.kr';
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
