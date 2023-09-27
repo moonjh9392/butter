@@ -107,9 +107,25 @@ const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
   };
   const [formData, setFormData] = useState<FormData>(init_formData);
 
+  //input empty 검증 함수
+  const isFormDataEmpty = (formData: Object) => {
+    for (const key of Object.keys(formData)) {
+      if (formData[key] === '') {
+        return true; // 하나 이상의 속성이 비어있으면
+      }
+    }
+    return false;
+  };
+
   const handleSubmit = async (e: React.FormEvent, type: string) => {
     e.preventDefault();
     if (type === MODAL_SIGNUP) {
+      // formData에서 id,passwordConfirm 필드를 삭제하고 API로 보내기
+      const { id, passwordConfirm, ...dataToSend } = formData;
+
+      //input empty
+      if (isFormDataEmpty(dataToSend)) return alert('비어있는 칸이 있습니다.');
+
       // 유저 아이디 정규 표현식 검증
       const userIdRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,15}$/;
 
@@ -122,8 +138,7 @@ const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
         alert('비밀번호와 Re-Enter가 일치하지 않습니다.');
         return;
       }
-      // formData에서 id,passwordConfirm 필드를 삭제하고 API로 보내기
-      const { id, passwordConfirm, ...dataToSend } = formData;
+
       //SingUp API
       const result = await UserAuth(dataToSend, true);
       if (result.status === 200) {
@@ -134,6 +149,10 @@ const SignInForm = ({ current, setCurrent, toggleModal }: SignFormProps) => {
     }
     if (type === MODAL_SIGNIN) {
       const { id, password } = formData;
+
+      //input empty
+      if (isFormDataEmpty({ id, password })) return alert('비어있는 칸이 있습니다.');
+
       //SignIn API
       const result = await UserAuth({ id, password }, false);
       if (result.status === 200) {
