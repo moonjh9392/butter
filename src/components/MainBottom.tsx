@@ -77,7 +77,7 @@ const Bottom = () => {
         <p>고객의 요구에 맞춘 최상의 서비스를 제공합니다.</p>
       </Desc>
       <Desc>
-        <a href={'https://github.com/moonjh9392'} target="_blank" rel="noopener noreferrer">
+        <a href={'https://github.com/moonjh9392/butter'} target="_blank" rel="noopener noreferrer">
           VIEW MORE
         </a>
       </Desc>
