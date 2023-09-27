@@ -26,7 +26,6 @@ export const UserAuth = async <T>(data: T, isSignUp: boolean): Promise<AxiosResp
       }
     }
   } catch (error) {
-    console.error(error);
     alert(isSignUp ? '회원가입 실패' : '로그인 실패'); // 에러 메시지를 알림으로 표시
     return error;
   }
@@ -44,7 +43,6 @@ export const UserInfo = async (): Promise<AxiosResponse | AxiosError> => {
       throw new Error('undefined imgUrl');
     }
   } catch (error) {
-    console.error(error);
     return error;
   }
 };
